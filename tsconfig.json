@@ -16,6 +16,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-waterfall": [
+        "dist/ngx-waterfall"
+      ],
+      "ngx-waterfall/*": [
+        "dist/ngx-waterfall/*"
+      ]
+    }
   }
 }

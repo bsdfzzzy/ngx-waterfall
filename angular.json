@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-waterfall": {
+    "ngx-waterfall-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-waterfall",
+            "outputPath": "dist/ngx-waterfall-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-waterfall:build"
+            "browserTarget": "ngx-waterfall-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-waterfall:build:production"
+              "browserTarget": "ngx-waterfall-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-waterfall:build"
+            "browserTarget": "ngx-waterfall-app:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "ngx-waterfall-e2e": {
+    "ngx-waterfall-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ngx-waterfall:serve"
+            "devServerTarget": "ngx-waterfall-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ngx-waterfall:serve:production"
+              "devServerTarget": "ngx-waterfall-app:serve:production"
             }
           }
         },
@@ -133,7 +133,42 @@
           }
         }
       }
+    },
+    "ngx-waterfall": {
+      "root": "projects/ngx-waterfall",
+      "sourceRoot": "projects/ngx-waterfall/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-waterfall/tsconfig.lib.json",
+            "project": "projects/ngx-waterfall/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-waterfall/src/test.ts",
+            "tsConfig": "projects/ngx-waterfall/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-waterfall/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-waterfall/tsconfig.lib.json",
+              "projects/ngx-waterfall/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "ngx-waterfall"
+  "defaultProject": "ngx-waterfall-app"
 }
