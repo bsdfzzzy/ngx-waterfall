@@ -8,7 +8,8 @@ import {
   Renderer2,
   Input,
   ViewChild,
-  ElementRef
+  ElementRef,
+  AfterContentChecked
 } from '@angular/core'
 import { NgxWaterfallItemDirective } from './ngx-waterfall-item.directive'
 
@@ -18,7 +19,8 @@ import { NgxWaterfallItemDirective } from './ngx-waterfall-item.directive'
   styleUrls: ['ngx-waterfall.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NgxWaterfallComponent implements AfterContentInit {
+export class NgxWaterfallComponent
+  implements AfterContentInit, AfterContentChecked {
   @ContentChildren(NgxWaterfallItemDirective) waterfallItemList!: QueryList<
     NgxWaterfallItemDirective
   >
@@ -28,6 +30,7 @@ export class NgxWaterfallComponent implements AfterContentInit {
   offsetTopArray: Array<number>
   offsetLeftArray: Array<number>
   colNum: number
+  prevItemLength: number
 
   @Input() itemWidth: number
   @Input() gap = 10
@@ -36,7 +39,17 @@ export class NgxWaterfallComponent implements AfterContentInit {
 
   ngAfterContentInit() {
     this.initialData()
-    this.renderAllItem()
+    this.renderItem()
+  }
+
+  ngAfterContentChecked() {
+    if (this.waterfallItemList.length !== this.prevItemLength) {
+      const lastAddItemList = this.waterfallItemList.filter((item, i) => {
+        return i > this.prevItemLength - 1
+      })
+      this.renderItem(lastAddItemList)
+      this.prevItemLength = this.waterfallItemList.length
+    }
   }
 
   protected initialData() {
@@ -48,6 +61,7 @@ export class NgxWaterfallComponent implements AfterContentInit {
         return
       }
     }
+    this.prevItemLength = this.waterfallItemList.length
     this.colNum = Math.floor(
       (this.waterfallContainerElement.nativeElement.clientWidth + this.gap) /
         (this.itemWidth + this.gap)
@@ -61,8 +75,12 @@ export class NgxWaterfallComponent implements AfterContentInit {
     console.log(this.offsetLeftArray)
   }
 
-  protected renderAllItem() {
-    this.waterfallItemList.forEach(item => {
+  protected renderItem(
+    waterfallItemList:
+      | QueryList<NgxWaterfallItemDirective>
+      | Array<NgxWaterfallItemDirective> = this.waterfallItemList
+  ) {
+    waterfallItemList.forEach(item => {
       this.renderer.setStyle(
         item.el.nativeElement,
         'width',
