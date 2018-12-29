@@ -27,13 +27,19 @@ export class NgxWaterfallComponent
   @ViewChild('container') waterfallContainerElement: ElementRef
 
   nextIndex = 0
-  offsetTopArray: Array<number>
-  offsetLeftArray: Array<number>
+  offsetTopArray: Array<number> = []
+  offsetLeftArray: Array<number> = []
   colNum: number
   prevItemLength: number
 
   @Input() itemWidth: number
   @Input() gap = 10
+
+  get largestTop() {
+    return this.offsetTopArray.reduce((a, b) => {
+      return a > b ? a : b
+    })
+  }
 
   constructor(private cd: ChangeDetectorRef, private renderer: Renderer2) {}
 
