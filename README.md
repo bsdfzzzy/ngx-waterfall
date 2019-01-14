@@ -1,27 +1,31 @@
 # NgxWaterfall
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
+This is an easy use waterfall implementation for Angular 4+. For now, supporting latest Angular version.
 
-## Development server
+## Getting Start
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### API DOC
 
-## Code scaffolding
+### DEMO
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Contribute
 
-## Build
+### Welcome to add issues and add new blood into the code base
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### local development
 
-## Running unit tests
+Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Running unit tests
+
+Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+### Build
+
+Run `npm run build:lib` to build the library. The build artifacts will be stored in the `dist/` directory.
+
+It is necessary the demo app should use library after built in the dist directory.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

@@ -32,8 +32,20 @@ export class NgxWaterfallComponent
   colNum: number
   prevItemLength: number
 
-  @Input() itemWidth: number
   @Input() gap = 10
+
+  private _itemWidth: number
+  get itemWidth() {
+    return this._itemWidth
+  }
+
+  @Input() set itemWidth(value: number) {
+    this._itemWidth = value
+    if (this.offsetLeftArray.length > 0) {
+      this.initialData()
+      this.renderItem()
+    }
+  }
 
   get largestTop() {
     return this.offsetTopArray.reduce((a, b) => {
