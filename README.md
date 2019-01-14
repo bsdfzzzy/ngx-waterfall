@@ -4,9 +4,9 @@ This is an easy use waterfall implementation for Angular 4+. For now, supporting
 
 ## Getting Start
 
-### [API DOC](https://bsdfzzzy.github.io/ngx-waterfall/)
+### API DOC
 
-### DEMO
+### [DEMO](https://bsdfzzzy.github.io/ngx-waterfall/)
 
 ## Contribute
 
