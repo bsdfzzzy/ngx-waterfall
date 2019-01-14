@@ -6,6 +6,21 @@ This is an easy use waterfall implementation for Angular 4+. For now, supporting
 
 ### API DOC
 
+- ngx-waterfall
+
+  #### Input
+
+  - gap: number `The gap width(px) between two columns.`
+  - shouldListenToResize: boolean `Default to false. If true, the component will listen to window resize event to rerender the waterfall.`
+
+  #### Output
+
+  - afterRendered: EventEmitter<number> `Emitted after render time.`
+
+- ngx-waterfall-item
+
+  Used to point the items in the waterfall container.
+
 ### [DEMO](https://bsdfzzzy.github.io/ngx-waterfall/)
 
 ## Contribute

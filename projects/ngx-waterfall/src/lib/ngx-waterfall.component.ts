@@ -9,9 +9,13 @@ import {
   Input,
   ViewChild,
   ElementRef,
-  AfterContentChecked
+  AfterContentChecked,
+  HostListener,
+  Output,
+  EventEmitter
 } from '@angular/core'
 import { NgxWaterfallItemDirective } from './ngx-waterfall-item.directive'
+import { Directions } from './model'
 
 @Component({
   selector: 'ngx-waterfall',
@@ -31,8 +35,11 @@ export class NgxWaterfallComponent
   offsetLeftArray: Array<number> = []
   colNum: number
   prevItemLength: number
+  @Output() afterRendered = new EventEmitter<number>()
 
   @Input() gap = 10
+  @Input() shouldListenToResize = false
+  @Input() direction = Directions.LEFT_TO_RIGHT
 
   private _itemWidth: number
   get itemWidth() {
@@ -54,6 +61,14 @@ export class NgxWaterfallComponent
   }
 
   constructor(private cd: ChangeDetectorRef, private renderer: Renderer2) {}
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    if (this.shouldListenToResize) {
+      this.initialData()
+      this.renderItem()
+    }
+  }
 
   ngAfterContentInit() {
     this.initialData()
@@ -90,7 +105,6 @@ export class NgxWaterfallComponent
         return index * (this.itemWidth + this.gap)
       }
     )
-    console.log(this.offsetLeftArray)
   }
 
   protected renderItem(
@@ -106,6 +120,7 @@ export class NgxWaterfallComponent
       )
       this.renderNextEle(item)
     })
+    this.afterRendered.emit(this.colNum)
   }
 
   private renderNextEle(item: NgxWaterfallItemDirective) {
