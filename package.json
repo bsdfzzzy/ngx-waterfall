@@ -6,6 +6,7 @@
     "start": "ng serve --port 4001 --host 0.0.0.0",
     "build": "ng build",
     "build:lib": "ng build ngx-waterfall",
+    "build:docs": "ng build ngx-waterfall-app --outputPath=docs",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
